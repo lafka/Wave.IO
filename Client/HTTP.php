@@ -16,7 +16,7 @@
 
 namespace Wave\IO\Client;
 
-use Wave\IO\Filter\Iface as FilterIface, UnexpectedValueException;
+use Wave\IO\Filter\Iface as FilterIface, UnexpectedValueException, LogicException;
 
 class HTTP {
 	protected $endpoint;
@@ -49,7 +49,7 @@ class HTTP {
 		$this->endpoint = parse_url($endpoint);
 
 		if (!extension_loaded('curl')) {
-			throw new LogicExcpetion("CURL extension is not installed");
+			throw new LogicException("CURL extension is not installed");
 		}
 
 		$this->curl = curl_init();
