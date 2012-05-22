@@ -105,6 +105,7 @@ class HTTP {
 		curl_setopt($localhandle, CURLOPT_HTTPHEADER, array('Accept: ' . implode(',', $this->filter->mime())));
 		curl_setopt($localhandle, CURLINFO_HEADER_OUT, true);
 		curl_setopt($localhandle, CURLOPT_URL, $this->endpoint['host'] . $resource);
+		curl_setopt($localhandle, CURLOPT_RETURNTRANSFER, true);
 
 		$raw  = curl_exec($localhandle);
 		$code = curl_getinfo($localhandle, CURLINFO_HTTP_CODE);
