@@ -118,7 +118,7 @@ class XML extends DOMDocument implements Iface {
 			$node->appendChild($child);
 
  			if (is_array($arr[$k[$i]])) {
- 				$this->createNode($arr[$k[$i]], $child);
+ 				$this->arrayWalker($arr[$k[$i]], $child);
  			}
 
 			unset($child);
