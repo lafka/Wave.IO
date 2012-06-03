@@ -2,7 +2,7 @@
 /**
  * Wave HTTP client
  *
- * Copyright (c) 2012 Frengstad Web Teknologi and contributors  
+ * Copyright (c) 2012 Frengstad Web Teknologi and contributors 
  * All rights reserved
  *
  * XML filter for HTTP input stream
@@ -31,7 +31,7 @@ class XML extends DOMDocument implements Iface {
 
 	/**
 	 * The Xpath object to use
-	 * @var \DOMXpath 
+	 * @var \DOMXpath
 	 */
  	private $xpath;
 
@@ -42,7 +42,7 @@ class XML extends DOMDocument implements Iface {
  	private $root;
 
  	/**
- 	 * The name of child elements 
+ 	 * The name of child elements
  	 * @var string
  	 */
  	private $listname;
@@ -126,7 +126,7 @@ class XML extends DOMDocument implements Iface {
 	}
 
 	/**
-	 * Recursive XML walker 
+	 * Recursive XML walker
 	 *
 	 * Converts a SimpleXMLElement to a PHP array
 	 *

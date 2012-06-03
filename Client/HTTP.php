@@ -2,7 +2,7 @@
 /**
  * Wave HTTP client
  *
- * Copyright (c) 2012 Frengstad Web Teknologi and contributors  
+ * Copyright (c) 2012 Frengstad Web Teknologi and contributors 
  * All rights reserved
  *
  * Client for communicating with HTTP endpoints
