@@ -78,7 +78,18 @@ class XML extends DOMDocument implements Iface {
 			throw new InvalidArgumentException(__METHOD__ . " first argument could not be interpreted as XML ({$e->getMessage()})");
 		}
 
-		return $this->xmlWalker($xml);
+		$ret = array();
+		$ns  = $xml->getDocNamespaces();
+
+		if (empty($ns)) {
+			return $this->xmlWalker($xml);
+		} else {
+
+			foreach ($ns as $group => $uri) {
+				$ret[$group] = $this->xmlWalker($xml, $uri);
+			}
+		}
+		return $ret;
 	}
 
 	/**
@@ -134,21 +145,22 @@ class XML extends DOMDocument implements Iface {
 	 * @return array Processed array
 	 * @todo lafka 2012-03-19; Any point in handling float?
 	 */
-	private function xmlWalker (SimpleXMLElement $element) {
-		if (0 === count($element)) {
+	private function xmlWalker (SimpleXMLElement $element, $ns = null) {
+		if (0 === count($element->children($ns))) {
 			return is_int($element) ? (int) $element : (string) $element;
 		} else {
 			$t     = array();
 			$first = true;
-			foreach ($element as $k => $v) {
+
+			foreach ($element->children($ns) as $k => $v) {
 				if (array_key_exists($k, $t)) {
 					if (true === $first) {
 						$t[$k] = array($t[$k]);
 						$first = false;
 					}
-					$t[$k][] = $this->xmlWalker($v);
+					$t[$k][] = $this->xmlWalker($v, $ns);
 				} else {
-					$t[$k] = $this->xmlWalker($v);
+					$t[$k] = $this->xmlWalker($v, $ns);
 				}
 			}
 		}
