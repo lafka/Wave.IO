@@ -16,6 +16,8 @@
 
 namespace Wave\IO\Filter;
 
+use InvalidArgumentException;
+
 /**
  * Allow encoding and decoding of a input stream from JSON
  */
@@ -35,6 +37,11 @@ class JSON implements Iface {
 	 */
 	public function decode ($raw) {
 		$a = json_decode($raw);
+
+		if (is_null($a)) {
+			throw new InvalidArgumentException("String could not be decoded as JSON");
+		}
+
 		array_walk_recursive($a, function (&$v) {
 			is_object($v) && $v = (array) $v;
 		});
