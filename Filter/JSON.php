@@ -2,14 +2,14 @@
 /**
  * Wave HTTP client
  *
- * Copyright (c) 2012 Frengstad Web Teknologi and contributors 
+ * Copyright (c) 2012 Frengstad Web Teknologi and contributors
  * All rights reserved
  *
  * XML filter for HTTP input stream
  *
  * @package	  wave.io
  * @version	  0.1
- * @copyright Frengstad Web Teknologi	
+ * @copyright Frengstad Web Teknologi
  * @author	  Olav Frengstad <olav@fwt.no>
  * @license	  BSD 3 Clause
  */
@@ -34,7 +34,11 @@ class JSON implements Iface {
 	 * @throws InvalidArgumentException If XML is not valid
 	 */
 	public function decode ($raw) {
-		return json_decode($raw);
+		$a = json_decode($raw);
+		array_walk_recursive($a, function (&$v) {
+			is_object($v) && $v = (array) $v;
+		});
+		return (array) $a;
 	}
 
 	/**
