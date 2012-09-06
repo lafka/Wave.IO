@@ -54,10 +54,10 @@ class CSV implements Iface {
 
 		$key = key($arr);
 		// Enfore single dimension
-		$k   = array_keys(reset($arr[$key]));
+		$k   = array_keys(is_int($key) ? $arr[$key] : reset($arr[$key]));
 		$ret = implode(',', $k) . "\r\n";
 
-		foreach ($arr[$key] as $v) {
+		foreach ((is_int($key) ? $arr : $arr[$key]) as $v) {
 			$ret .= implode(',', $v) . "\r\n";
 		}
 
