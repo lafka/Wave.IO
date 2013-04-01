@@ -87,7 +87,7 @@ class HTTP {
 	 * @param string $resource The resource identifier to query for
 	 * @param string $method The HTTP method to use.
 	 * @param array  $raw Request parameters
-	 * @return array The parsed result as an array
+	 * @return \stdClass An object contain result,raw,code properties
 	 */
 	public function request ($resource, $method = 'GET', $raw = array()) {
 		if (!$this->filter instanceof FilterIface) {
@@ -111,7 +111,10 @@ class HTTP {
 		$code = curl_getinfo($localhandle, CURLINFO_HTTP_CODE);
 		//$type = curl_getinfo($this->curl, CURLINFO_CONTENT_TYPE);
 
-		$resp = $this->filter->decode($raw);
+		$resp = new \stdClass();
+		$resp->result = $this->filter->decode($raw);
+		$resp->raw    = $raw;
+		$resp->code   = $code;
 
 		curl_close($localhandle);
 
