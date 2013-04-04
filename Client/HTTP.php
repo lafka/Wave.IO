@@ -112,9 +112,12 @@ class HTTP {
 		//$type = curl_getinfo($this->curl, CURLINFO_CONTENT_TYPE);
 
 		$resp = new \stdClass();
-		$resp->result = $this->filter->decode($raw);
-		$resp->raw    = $raw;
-		$resp->code   = $code;
+		$resp->result   = $this->filter->decode($raw);
+		$resp->raw      = $raw;
+		$resp->code     = $code;
+		$resp->url      = $resource;
+		$resp->endpoint = $this->endpoint;
+		$resp->method   = strtoupper($method);
 
 		curl_close($localhandle);
 
