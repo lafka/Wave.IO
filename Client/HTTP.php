@@ -24,6 +24,9 @@ class HTTP {
 	protected $accepts = array(
 		'application/xml'  => '\Wave\IO\Filter\XML',
 		'application/json' => '\Wave\IO\Filter\JSON',
+		'text/html'        => '\Wave\IO\Filter\HTML',
+		'text/csv'         => '\Wave\IO\Filter\CSV',
+		'text/tsv'         => '\Wave\IO\Filter\TSV',
 	);
 
 	/**
