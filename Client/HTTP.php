@@ -84,6 +84,14 @@ class HTTP {
 		$this->filter = new $this->accepts[$format];
 	}
 
+	public function encode ($data) {
+		return $this->filter->encode($data);
+	}
+
+	public function decode ($data) {
+		return $this->filter->decode($data);
+	}
+
 	/**
 	 * Make a query for a given resource
 	 *
